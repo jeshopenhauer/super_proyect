@@ -2,41 +2,17 @@ from open_page import open_page
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException, NoSuchElementException, ElementClickInterceptedException
+from selenium.common.exceptions import TimeoutException, NoSuchElementException
 import time
 import csv
 import os
+import sys
 import json
-import datetime  # Importamos el módulo completo para usar datetime.datetime
-from datetime import datetime as dt  # Alias para evitar conflictos
+from datetime import datetime
 
-def extract_html(driver):
-    """
-    Extrae el HTML completo de la página actual
-    
-    Args:
-        driver: Instancia del navegador Selenium
+# Función extract_html eliminada
         
-    Returns:
-        str: HTML completo de la página o None si falla
-    """
-    try:
-        # Esperar a que la página cargue completamente
-        WebDriverWait(driver, 30).until(
-            EC.presence_of_element_located((By.TAG_NAME, "body"))
-        )
-        
-        # Extraer el HTML completo
-        html_content = driver.page_source
-        
-        print(f"HTML conseguido ok. Tamaño: {len(html_content)} bytes")
-        return html_content
-    
-    except Exception as e:
-        print(f"Error al extraer HTML: {e}")
-        return None
-        
-def extract_table_data(driver, wait_time=60):
+def extract_table_data(driver, wait_time=30):
     """
     Extrae datos de la tabla de la página SLIR después de que cargue dinámicamente
     
@@ -53,10 +29,10 @@ def extract_table_data(driver, wait_time=60):
         # Esperar a que desaparezca el spinner de carga si existe
         try:
             spinner_selector = ".spinner-container, .p-progress-spinner"
-            spinner = WebDriverWait(driver, 10).until(
+            spinner = WebDriverWait(driver, 5).until(
                 EC.presence_of_element_located((By.CSS_SELECTOR, spinner_selector))
             )
-            print("Spinner de carga detectado, esperando a que desaparezca...")
+            print("Spinner de carga detectado...")
             WebDriverWait(driver, wait_time).until(
                 EC.invisibility_of_element_located((By.CSS_SELECTOR, spinner_selector))
             )
@@ -65,26 +41,21 @@ def extract_table_data(driver, wait_time=60):
             pass
         
         # Esperar a que aparezca la tabla o filas de la tabla
-        print("Esperamos a que aparezca la tabla...")
+        print("Esperando a la tabla...")
         WebDriverWait(driver, wait_time).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, "table tbody tr, tr td"))
         )
         
-        # Esperamos un poco más para asegurar que todos los datos se han cargado
-        time.sleep(2)
         
-        # 1. Extraer información general del proyecto
-        project_info = extract_project_info(driver)
-        
-        # 2. Extraer datos de la tabla
+        # Extraer solo datos de la tabla
         table_data = extract_table_rows(driver)
         
         result = {
-            "project_info": project_info,
+            "project_info": {},  # Proyecto info vacío ya que se eliminó esa función
             "table_data": table_data
         }
         
-        print(f"Datos de la tabla extraídos exitosamente. {len(table_data)} filas encontradas.")
+        print(f"Datos de la tabla conseguidos: {len(table_data)} filas ")
         return result
         
     except TimeoutException as e:
@@ -97,40 +68,7 @@ def extract_table_data(driver, wait_time=60):
         print(f"Error al extraer datos de la tabla: {e}")
         return None
 
-def extract_project_info(driver):
-    """Extrae la información general del proyecto que aparece en la parte superior"""
-    project_info = {}
-    
-    try:
-        # Extraer código del proyecto
-        project_code_elem = driver.find_element(By.CSS_SELECTOR, "div:contains('Project Code') + div, .project-code")
-        project_info["project_code"] = project_code_elem.text.strip()
-    except:
-        project_info["project_code"] = "No encontrado"
-    
-    try:
-        # Extraer nombre del proyecto
-        project_name_elem = driver.find_element(By.CSS_SELECTOR, "div:contains('Project Name') + div, .project-name")
-        project_info["project_name"] = project_name_elem.text.strip()
-    except:
-        project_info["project_name"] = "No encontrado"
-    
-    try:
-        # Extraer tipo del proyecto
-        project_type_elem = driver.find_element(By.CSS_SELECTOR, "div:contains('Project Type') + div, .project-type")
-        project_info["project_type"] = project_type_elem.text.strip()
-    except:
-        project_info["project_type"] = "No encontrado"
-    
-    # Intentamos extraer más información si está disponible
-    for field in ["Technical PRAC", "Launch Period", "Rol Launch", "Rol Request", "PRAC Last Update"]:
-        try:
-            field_elem = driver.find_element(By.XPATH, f"//div[contains(text(),'{field}')]/following-sibling::div[1]")
-            project_info[field.lower().replace(" ", "_")] = field_elem.text.strip()
-        except:
-            project_info[field.lower().replace(" ", "_")] = "No encontrado"
-    
-    return project_info
+# Función extract_project_info eliminada
 
 def extract_table_rows(driver):
     """Extrae todas las filas de la tabla principal"""
@@ -199,13 +137,12 @@ def extract_table_rows(driver):
     
     return table_data
 
-def process_slir_code(code, max_pages=None):
+def process_slir_code(code):
     """
     Procesa un código SLIR específico
     
     Args:
         code (str): Código SLIR para procesar (ejemplo: SLIR1ST230476)
-        max_pages (int, optional): Número máximo de páginas a procesar. None para todas.
         
     Returns:
         dict: Datos extraídos o None si falla
@@ -218,26 +155,28 @@ def process_slir_code(code, max_pages=None):
             print(f"No se pudo abrir la página para el código: {code}")
             return None
         
-        # Extraer el HTML como prueba
-        html_content = extract_html(driver)
-        
-        if not html_content:
-            print(f"No se pudo extraer el HTML para el código: {code}")
-            driver.quit()
-            return None
-        
-        # Guardar el HTML en un archivo
-        output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output")
+        # Detectar si estamos en un entorno PyInstaller
+        if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+            # Estamos en el ejecutable - usar rutas relativas al ejecutable
+            base_path = os.path.dirname(sys.executable)
+            output_dir = os.path.join(base_path, "output")
+        else:
+            # Estamos en el script normal
+            output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output")
+            
         os.makedirs(output_dir, exist_ok=True)
         
-        timestamp = dt.now().strftime("%Y%m%d_%H%M%S")
-        html_filename = os.path.join(output_dir, f"slir_{code}_{timestamp}.html")
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        # Ya no guardamos el HTML
+        html_filename = None
         
-        with open(html_filename, "w", encoding="utf-8") as f:
-            f.write(html_content)
+        # Detectar el número total de páginas
+        total_pages = get_total_pages(driver)
+        if total_pages:
+            print(f"Número total de páginas detectado: {total_pages}")
+        else:
+            print("No se pudo detectar el número total de páginas, se procesarán todas las disponibles")
             
-        print(f"HTML guardado en: {html_filename}")
-        
         # Extraer datos de la tabla dinámica de la primera página
         print("Extrayendo datos de la tabla dinámica (página 1)...")
         all_table_data = extract_table_data(driver)
@@ -246,27 +185,25 @@ def process_slir_code(code, max_pages=None):
             print(f"No se pudieron extraer datos de la tabla para el código: {code}")
             return {
                 "code": code,
-                "html_file": html_filename,
                 "extraction_time": timestamp,
                 "success": False,
                 "message": "No se pudieron extraer datos de la tabla"
             }
         
-        # Información del proyecto (se mantiene igual en todas las páginas)
-        project_info = all_table_data.get("project_info", {})
-        
-        # Todos los datos de filas de todas las páginas
+        # Solo necesitamos los datos de la tabla
         all_rows = all_table_data.get("table_data", [])
         
-        # Procesar páginas adicionales si se requiere
+        # Procesar páginas adicionales si existen
         current_page = 1
-        while max_pages is None or current_page < max_pages:
+        max_page = total_pages if total_pages else float('inf')  # Infinito si no se conoce el total
+        
+        while current_page < max_page:
             # Intentar hacer clic en el botón "Next Page"
             print(f"\nIntentando navegar a la página {current_page + 1}...")
             next_page_success = click_next_page(driver)
             
             if not next_page_success:
-                print(f"No hay más páginas disponibles o no se pudo navegar a la siguiente página.")
+                print("No hay más páginas disponibles.")
                 break
                 
             # Si el clic fue exitoso, extraer datos de la nueva página
@@ -287,9 +224,11 @@ def process_slir_code(code, max_pages=None):
         
         # Actualizar el diccionario con todos los datos combinados
         combined_data = {
-            "project_info": project_info,
+            "project_info": {},  # Ya no tenemos info del proyecto
             "table_data": all_rows,
-            "pages_processed": current_page
+            "pages_processed": current_page,
+            "total_pages": total_pages if total_pages else current_page,
+            "total_rows": len(all_rows)
         }
         
         # Guardar los datos combinados en formato JSON
@@ -297,7 +236,7 @@ def process_slir_code(code, max_pages=None):
         with open(json_filename, "w", encoding="utf-8") as f:
             json.dump(combined_data, f, ensure_ascii=False, indent=2)
         
-        print(f"\nDatos combinados guardados en: {json_filename}")
+        print(f"Datos combinados guardados en: {json_filename}")
         
         # Guardar datos combinados en formato CSV
         csv_filename = os.path.join(output_dir, f"slir_{code}_{timestamp}_data.csv")
@@ -307,7 +246,6 @@ def process_slir_code(code, max_pages=None):
         
         return {
             "code": code,
-            "html_file": html_filename,
             "json_file": json_filename,
             "csv_file": csv_filename,
             "extraction_time": timestamp,
@@ -322,7 +260,7 @@ def process_slir_code(code, max_pages=None):
     
     finally:
         # No cerramos el driver automáticamente para permitir revisar la página
-        print("Navegador mantenido abierto para revisión manual.")
+        print("Dejamos el navegador abierto.")
         # Descomentar las siguientes líneas cuando se quiera volver a cerrar automáticamente
         # if 'driver' in locals() and driver:
         #     try:
@@ -331,96 +269,108 @@ def process_slir_code(code, max_pages=None):
         #     except:
         #         pass
 
-def click_next_page(driver, max_retries=3, wait_time=10):
+def get_total_pages(driver, wait_time=5):
     """
-    Hace clic en el botón 'Next Page' para avanzar a la siguiente página de resultados
+    Obtiene el número total de páginas disponibles al cargar la página
     
     Args:
         driver: WebDriver de Selenium
-        max_retries: Número máximo de intentos de clic
+        wait_time: Tiempo máximo de espera en segundos
+        
+    Returns:
+        int: Número total de páginas o None si no se puede determinar
+    """
+    try:
+        print("Detectando número total de páginas...")
+        
+        # Esperar a que el paginador cargue
+        WebDriverWait(driver, wait_time).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "span.p-paginator-pages, .p-paginator"))
+        )
+        
+        # Método 1: Buscar botones de página con aria-label
+        page_buttons = driver.find_elements(By.CSS_SELECTOR, "button[aria-label]")
+        page_numbers = []
+        
+        for button in page_buttons:
+            aria_label = button.get_attribute("aria-label")
+            if aria_label and aria_label.isdigit():
+                page_numbers.append(int(aria_label))
+        
+        if page_numbers:
+            total = max(page_numbers)
+            print(f"Total de páginas detectado: {total}")
+            return total
+            
+       
+        
+    except Exception as e:
+        print(f"Error al detectar el número de páginas: {e}")
+        return None
+
+def click_next_page(driver, wait_time=5):
+    """
+    Hace clic en el botón 'Next Page' para avanzar a la siguiente página de resultados
+    utilizando JavaScript (más confiable para este caso)
+    
+    Args:
+        driver: WebDriver de Selenium
         wait_time: Tiempo máximo de espera en segundos
         
     Returns:
         bool: True si el clic fue exitoso, False en caso contrario
     """
-    # Iniciar cronómetro
-    tiempo_inicio = datetime.datetime.now()
-    
-    print("Buscando el botón 'Next Page'...")
-    
-    # Intentar hacer clic con diferentes selectores
-    selectors = [
-        (By.CSS_SELECTOR, "button[aria-label='Next Page']"),
-        (By.XPATH, "//button[@aria-label='Next Page']"),
-        (By.XPATH, "//button[contains(@class, 'p-paginator-next')]"),
-        (By.CSS_SELECTOR, ".p-paginator-next")
-    ]
-    
-    for attempt in range(max_retries):
-        for selector_type, selector in selectors:
-            try:
-                # Esperar a que el botón sea clickeable
-                button = WebDriverWait(driver, wait_time).until(
-                    EC.element_to_be_clickable((selector_type, selector))
-                )
-                
-                print(f"Botón 'Next Page' encontrado con selector: {selector}")
-                
-                # Intentar hacer scroll hasta el botón para asegurarnos de que es visible
-                driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", button)
-                time.sleep(1)  # Pequeña pausa para permitir que se complete el scroll
-                
-                # Hacer clic en el botón
-                print("Haciendo clic en el botón 'Next Page'")
-                button.click()
-                
-                # Esperar a que la página se actualice (spinner o cambio en el contenido)
-                print("Esperando a que la página se actualice...")
-                
-                # Esperar a que aparezca un spinner si existe
-                try:
-                    spinner_selector = ".spinner-container, .p-progress-spinner"
-                    WebDriverWait(driver, 3).until(
-                        EC.presence_of_element_located((By.CSS_SELECTOR, spinner_selector))
-                    )
-                    print("Spinner de carga detectado, esperando a que desaparezca...")
-                    WebDriverWait(driver, wait_time).until(
-                        EC.invisibility_of_element_located((By.CSS_SELECTOR, spinner_selector))
-                    )
-                except TimeoutException:
-                    # Si no hay spinner, esperamos un momento para que se cargue la nueva página
-                    time.sleep(2)
-                
-                # Calcular tiempo transcurrido
-                tiempo_fin = datetime.datetime.now()
-                tiempo_total = (tiempo_fin - tiempo_inicio).total_seconds()
-                print(f"✓ Clic en 'Next Page' realizado correctamente (tiempo: {tiempo_total:.2f} segundos)")
-                return True
-                
-            except TimeoutException:
-                print(f"Timeout esperando el botón con selector: {selector}")
-                continue
-            except ElementClickInterceptedException:
-                print(f"El botón está tapado por otro elemento. Intentando con JavaScript...")
-                try:
-                    driver.execute_script("arguments[0].click();", button)
-                    tiempo_fin = datetime.datetime.now()
-                    tiempo_total = (tiempo_fin - tiempo_inicio).total_seconds()
-                    print(f"✓ Clic realizado con JavaScript (tiempo: {tiempo_total:.2f} segundos)")
-                    time.sleep(2)  # Esperamos a que se procese el clic
-                    return True
-                except Exception as e:
-                    print(f"Error al hacer clic con JavaScript: {e}")
-                    continue
-            except Exception as e:
-                print(f"Error al hacer clic en el botón: {e}")
-                continue
+    try:
+        print("Buscando el botón 'Next Page'...")
         
-        print(f"Intento {attempt + 1} fallido. Esperando antes de reintentar...")
-        time.sleep(2)
-    
-    print(f"❌ No se pudo hacer clic en el botón 'Next Page' después de {max_retries} intentos")
-    return False
+        # Verificar primero si el botón está deshabilitado (última página)
+        disabled_buttons = driver.find_elements(By.CSS_SELECTOR, 
+            "button.p-paginator-next.p-disabled, button.p-paginator-next[disabled]")
+        
+        if disabled_buttons and len(disabled_buttons) > 0:
+            print("El botón 'Next Page' está deshabilitado. No se puede avanzar más.")
+            return False
+            
+        # Buscar el botón Next Page
+        next_button = WebDriverWait(driver, wait_time).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "button.p-paginator-next"))
+        )
+        
+        # Comprobar explícitamente si está deshabilitado
+        is_disabled = next_button.get_attribute("disabled") == "true" or "p-disabled" in next_button.get_attribute("class")
+        if is_disabled:
+            print("El botón 'Next Page' está deshabilitado. No se puede avanzar más.")
+            return False
+        
+        # Hacer scroll hasta el botón para asegurarnos de que es visible
+        driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", next_button)
+        time.sleep(0.5)
+        
+        # Hacer clic usando JavaScript (más confiable)
+        print("Haciendo clic en el botón 'Next Page'")
+        driver.execute_script("arguments[0].click();", next_button)
+        
+        # Esperar a que la página se actualice
+        try:
+            # Esperar a que aparezca el spinner si existe
+            spinner_selector = ".spinner-container, .p-progress-spinner"
+            WebDriverWait(driver, 2).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, spinner_selector))
+            )
+            # Esperar a que desaparezca
+            WebDriverWait(driver, wait_time).until(
+                EC.invisibility_of_element_located((By.CSS_SELECTOR, spinner_selector))
+            )
+        except TimeoutException:
+            # Si no hay spinner, esperamos un momento
+            time.sleep(1)
+        
+        print("✓ Clic realizado con JavaScript")
+        return True
+        
+    except Exception as e:
+        print(f"Error al hacer clic en el botón Next Page: {e}")
+        return False
 
 def save_to_csv(table_data, csv_filename):
     """
@@ -459,21 +409,13 @@ if __name__ == "__main__":
     test_code = "SLIR1ST230476"
     print(f"Procesando código SLIR de prueba: {test_code}")
     
-    # Procesar hasta 3 páginas como máximo (o todas si hay menos de 3)
-    max_pages = 3
-    print(f"Se procesarán hasta {max_pages} páginas")
-    
-    result = process_slir_code(test_code, max_pages=max_pages)
+    result = process_slir_code(test_code)
     
     if result and result.get("success", False):
         print(f"\nProcesamiento exitoso.")
-        print(f"- HTML guardado en: {result['html_file']}")
         print(f"- JSON guardado en: {result['json_file']}")
         print(f"- CSV guardado en: {result['csv_file']}")
-        
-        # Mostrar un resumen de los datos extraídos
-        if 'data' in result and 'table_data' in result['data']:
-            print(f"- Se procesaron {result.get('pages_processed', 1)} páginas")
-            print(f"- Se extrajeron {len(result['data']['table_data'])} filas en total")
+        print(f"- Filas extraídas: {result['data']['total_rows']}")
+        print(f"- Páginas procesadas: {result['pages_processed']}")
     else:
         print(f"No se pudo procesar el código: {test_code}")

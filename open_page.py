@@ -9,7 +9,8 @@ import subprocess
 import datetime
 
 # Constantes globales
-EDGE_USER_DATA_DIR = "C:\\Users\\jmoralar\\AppData\\Local\\Microsoft\\Edge\\User Data"
+# Usar una ruta independiente del usuario
+EDGE_USER_DATA_DIR = os.path.join(os.environ.get('LOCALAPPDATA', ''), "Microsoft", "Edge", "User Data")
 PROFILE_DIRECTORY = "Default"
 PAGE_URL = "https://str.apps.valeo.com/slir/single-slir?code=SLIR1ST230476"
 

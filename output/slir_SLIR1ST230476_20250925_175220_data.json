@@ -1,14 +1,5 @@
 {
-  "project_info": {
-    "project_code": "No encontrado",
-    "project_name": "No encontrado",
-    "project_type": "No encontrado",
-    "technical_prac": "No encontrado",
-    "launch_period": "No encontrado",
-    "rol_launch": "No encontrado",
-    "rol_request": "No encontrado",
-    "prac_last_update": "No encontrado"
-  },
+  "project_info": {},
   "table_data": [
     {
       "N°": "New",
@@ -809,5 +800,7 @@
       "column_28": ""
     }
   ],
-  "pages_processed": 3
+  "pages_processed": 3,
+  "total_pages": 3,
+  "total_rows": 30
 }
