@@ -1,0 +1,513 @@
+N°,Type,Flag,Image,Criticality,Created,Origin,Description,Responsible Network,PRAC Family,Escalation Level,Recovery Plan,Status,Links,Labels,Action Plan,Pilot,Forecasted Date,Next Review,Completion Date,column_20,column_21,column_22,column_23,column_24,column_25,column_26,column_27,column_28
+New,*,,,,25-Sep-2025,,,"What: Why: When: Who: Where: How: How many:
+*",,,,,,,,,,Select date,Select date,Select date,,,,,,,,
+126,*,,,,24-Sep-2025,WOoOM,,"What: NDT to be done Basis CW42, High CW46 is pending confirmation by customer
+Why: To assure we reach to planning
+When:
+Who:
+Where:
+How:
+How many:
+*
+Show",RSD,Product,,,,,,"24/09: Basis injection with modification in reflector LH LHD, High to go with microestructure in LB (to be received CW44 by platform)
+Show","FA
+Fernando AZNAR LAGUNA
+CA
+Christopher-alexander ALDERTON",03-Oct-2025,26-Sep-2025,Select date,,,In progress,,,,,Project WOoOM
+125,*,,,"3
+*",16-Sep-2025,WOoOM,,"What: Longlife test results postpone to CW50 not reaching BMG 
+Why: Parts delivery delay + blocked in customs 
+When: CW37
+Who: Chennai/ Alfredo Serma
+Where:
+How:
+How many:
+*
+Show",RSD,Planning,,,,,,"23/09: sent email to chennai (SK216- Long life tests planning delay- Critical to reach BMG deadline), pending feedback by Chennai. Timing for now for long life tests is CW50
+16/09: Requested to Chennai to improve planning, but not possible to improve more than 1/2 weeks (pending confirmation) so BMG deadline not reachable
+Show","AS
+Alfredo SERNA
+CA
+Christopher-alexander ALDERTON",30-Sep-2025,25-Sep-2025,Select date,,,"In progress
+*",,,,,
+124,*,,,3,09-Sep-2025,WOoOM,,"What: To assembly 5 sets of High and Basis to send for validation at Poland
+Why: Needs of parts for DV
+When: CW37.3
+Who: Glauber Menezes
+Where: MDC 
+How:
+How many: 5 sets of High version
+*
+Show",RSD,Product,,,,,,"24/09: Pendiente Carcazas izquierdas para montaje de piezas en CW39.1
+
+sigue pendiente de faros a confirmar mañana si es crítico. Han puesto como prioridades para las piezas que tenemos el Cubbing, VW52000 y envio a cliente
+
+
+
+09/09: Fabricacion de los 5 sets en linea y entrega a Christopher
+Show","RG
+Rafael GARCIA TORRES
+AS
+Antonio-javier SANTIAGO MOYA",29-Sep-2025,25-Sep-2025,Select date,,,In progress,,,,,
+"24/09: Piezas no recibidas aun
+09/09: Retrabajar la region del Bonnet para suavianzdo el escalon para mejorar la cuestion de estanquedad
+Show","CA
+Christopher-alexander ALDERTON",16-Sep-2025,10-Sep-2025,Select date,,,,,,,,,,,,,,,,,,,,,,,,
+09/09: Preparar envio de las piezas para el equipo de Polonia,"JJ
+Jesus-manuel JIMENEZ CONTRERAS",30-Sep-2025,26-Sep-2025,Select date,,,,,,,,,,,,,,,,,,,,,,,,
+09/09: Confirmar la disponibilidad y fecha para realizacion de los ensayos,"JJ
+Jesus-manuel JIMENEZ CONTRERAS",10-Sep-2025,10-Sep-2025,Select date,,,,,,,,,,,,,,,,,,,,,,,,
+123,*,,,"3
+*",03-Sep-2025,Customer,,"What: To define parts injection at Martos to evaluate CL tolerances and signaling variability
+Why: We need parts inject ASAP to start the activities
+When: CW37
+Who: 
+Where:
+How:
+How many:
+*
+Show",MFG,Product,,,,,,"24/09: Injection of LG fortiter (upper lightguide) is NOK as yellowish issue to be solved. To confirm next injection 
+03/09: To ask injection of all parts at Martos
+Show","FA
+Fernando AZNAR LAGUNA
+RG
+Rafael GARCIA TORRES",12-Sep-2025,05-Sep-2025,Select date,,,"In progress
+*",,,,,
+122,*,,,"1
+*",02-Sep-2025,WOoOM,,"What: Changes to be applied on Housing 
+Why: Several improvements must be applied
+When: TBD
+Who: Chris Alderton
+Where: MDC 
+How: LCR creation
+How many:
+*
+Show",RSD,Product,,,,,,"02/09: To include homologation marks and label nervs change
+24/09: Tooling shared planning 3 weeks to modify housing high for modification
+Show","CA
+Christopher-alexander ALDERTON",Select date,Select date,Select date,,,"New
+*",,,,,
+03/09: To remove Tower to improve waterproofness with bonet condition,"CA
+Christopher-alexander ALDERTON",Select date,Select date,Select date,,,,,,,,,,,,,,,,,,,,,,,,
+120,*,,,"3
+*",15-Jul-2025,,,"What: Suppliers still on stage 3 
+Why: 
+When: OTOP
+Who: Purchasing
+Where: SK216
+How: 
+How many: 9/16 suppliers
+*
+Show",PUR,Project,,,,,,15/07 Pending to close rest of suppliers for the beginning of August,"AP
+Andrea PEREZ MEDINA
+RG
+Rafael GARCIA TORRES",08-Aug-2025,09-Sep-2025,Select date,,,"New
+*",,,,,
+118,*,,,"1
+*",19-Jun-2025,Redbox,,"What: Fender sealing adhesive and adhesive on lens not valid for production. 
+Why: Cannot be removed by operator by hand. 
+When:
+Who:
+Where:
+How:
+How many:
+*
+Show",PUR,Suppliers,,,,,,"19/06: Solicitar a proveedor adhesivo con film para facilitar el montaje. 
+Solicitar a proveedor mas film inner de 0,60€.
+Show","AP
+Andrea PEREZ MEDINA
+RG
+Rafael GARCIA TORRES",11-Jul-2025,09-Sep-2025,Select date,,,"New
+*",,,,,
+115,*,,,"3
+*",26-May-2025,Supplier,,"What: Supplier Simu reports broken hot runner by sub supplier Yudo during FDPR. 
+New hot runner needs to be installed in molds, resulting in an increase in mold size. Inyection machine needed exceeds size intended (1200mm to 1242mm). Molde soporte BASIS
+Why: Hot runner broken. Mold transfer delayed. Inyection machine definition at risk.
+When: CW21
+Who: Tool tracker
+Where:
+How:
+How many:
+*
+Show",PRC,Process,,,,,,"30/07 Pending to inject the mold in Martos, forecasted for this week.
+17/06: Part to be inyected once mold arrives to Martos. Target CW29.
+
+04/06: Delta coste actual 0,49€ (PRS Febrero 2025). 
+
+Cálculo económico. entre los dos moldes original status vs new status
+
+02/06
+Molde soporte BASIS x2 moldes. 
+Molde soporte High 
+
+Revisión con proveedor . Analizar en profundidad el aumento del tamaño de molde y de coste
+
+Decisión transferir urgentemente el molde 06/06 por barco. Asegurar 700 piezas de JPC teniendo en cuenta scrap falta material en una mano. El cambio de cámara se hará en Martos JUDO / SIMU
+
+28/05/25: Supplier proposes change in part. Feedback to 3D proposal to be shared on 29/05.
+
+27/05/25: No alternate solutions provided by supplier. Hot runner needs to be changed and mold size increased. Mnagement decision needed for mold transfer.
+
+26/05/25: Supplier SIMU to provide action plan to avoid mold size increase. Follow up meeting on 27/05.
+Show","JM
+Jesus MORAL ARANDA",28-May-2025,05-Sep-2025,Select date,,,"In progress
+*",,,,,
+"28/05/25: Cost impact estimated at +0,46€. 
+
+27/05/25: Cost impact to externaliza Base Series support inyection.
+Show","RG
+Rafael GARCIA TORRES",28-May-2025,05-Sep-2025,Select date,,,,,,,,,,,,,,,,,,,,,,,,
+110,*,,,"3
+*",10-Apr-2025,WOoOM,,"What:NO QUALITY MASTER PARTS FOR TOOL VALIDATION AVAILABLE ( PATRONES ) 
+Why: TO VALIDATE THE R+E TOOLS IN ORDER TO BUILD PARTS FOR TRIALS.
+When:10/04/25
+Who:PROCESS P1
+Where: N/A
+How: N/A
+How many: 2 SETS
+*
+Show",QUA,Quality,,,,,,"31/07 Still pending of photometry master
+
+17/07 Pending photometry master
+
+01/07 Pending to put valves and deliver to laboratory
+
+17/06: Master parts at lab for measurement. Target to deliver to process CW25. 
+
+03/06: New parts with grained 2K lens to be delivered for master parts on CW23.5.
+
+30/05: Parts built. To be delivered to Lab. Target 30/05. 
+
+13/05: Master parts to be built on trial CW20.
+
+06/05/25: Master parts to be built on CW19, after parts to be measured in tunnel. 
+
+28/04/25 Requested again the tests parts 
+10/04/25 First request for the test parts
+Show","LM
+Lorena MIRANDA CANO
+IC
+Isabel CHAMORRO",16-May-2025,16-Sep-2025,Select date,,,"In progress
+*",,,,,Patrones
+105,*,,,"3
+*",01-Apr-2025,Supplier,,"What: Insert for turret in housing was not launched during RFQ phase. 3D of part was updated, but not offered by supplier. 
+Issue was detected when customer requested a change in the turret from 8mm diameter to 4mm. 
+Why: Missed by tooling tracker during RFQ phase. 
+When: June 2024
+Who:
+Where:
+How:
+How many:
+*
+Show",IND,Product,,,,,,"02/09 Pending of customer. Review in Meisterbock CW36
+
+17/06: Pending customer confirmation and mold arrival 
+
+03/06: Pending customer confirmation of implementation. 
+
+06/05: Modification to be done at Martos. Follow up after tool transfer. 
+
+09/04: Offer recieved and in review with purchasing. Modification share with Seat, pending feedback. 
+Pending cost impact in assy line @antonio
+
+01/04: Proposal and offer to modify turret to 4mm shared with customer. Pending feedback to determine modification. 
+3D of part to be sent to assy line supplier to determine impact. (3D SENT)
+Show","AR
+Antonio-jesus RUIZ
+CA
+Christopher-alexander ALDERTON
+FA
+Fernando AZNAR LAGUNA",25-Jul-2025,09-Sep-2025,Select date,,,"In progress
+*",,,,,
+New,*,,,,25-Sep-2025,,,"What: Why: When: Who: Where: How: How many:
+*",,,,,,,,,,Select date,Select date,Select date,,,,,,,,
+104,*,,,"2
+*",01-Apr-2025,Customer,,"What: Fender sealing gets deformed during carbody assembly. VW requests to add ribs to fender sealing to add robustness. 
+Why: Operator movement during assembly.
+When: CW13
+Who: Carolina Gordo (VW)
+Where: VW 
+How:
+How many:
+*
+Show",RSD,Product,,,,,,"02/09 Pending decision on Meisterbock of CW36 to implement the ribs
+
+05/08 Review modification done in the mold and in the fender sealing because the assembly is hard to be done
+
+17/06: 3D for all changes sent to supplier on CW24. Feedback from supplier target CW25.
+
+03/06: Prototype nerve breaks during assy. New proposal to be shared to customer on CW23.4. 
+
+11/05: VW approved prototype. Pending supplier planning. 
+
+06/05: Proto sent. VW to confirm if topic has been closed. 
+Pending modification implementation with supplier after customer approval.
+
+09/04: Proto for fender sealing too soft. Looking for alternate material on 09/04. 
+
+01/04: 3D created with proposal. Prototype fender sealing with ribs to be requested to send to customer for validation.
+Show","CA
+Christopher-alexander ALDERTON
+RG
+Rafael GARCIA TORRES",23-May-2025,09-Sep-2025,Select date,,,"In progress
+*",,,,,
+101,*,,,1,04-Mar-2025,WOoOM,,"Resource assignment if needed
+
+Identify workload issues through workload / skill matrix and arbitrate on necessary adjustment at appropriate hierarchical or operational level
+*
+Show",PUR,Suppliers,,,,,,"11/04/2025 No escalation 
+04/04/2025 NO escalation
+28/03/2025 No esclation
+21/03/2025No escalation
+14/03/2025 - No escalation 
+07/03/2025 - No escalation
+Show","RG
+Rafael GARCIA TORRES
+JT
+Jaime TORRES",15-May-2026,25-Apr-2025,Select date,,,In progress,,,,,
+100,*,,,1,04-Mar-2025,WOoOM,,"Follow up of actions decided or still opened during previous weekly meeting and PSC 
+
+Monitor purchasing process progress/KPIs and ensure necessary actions have been engaged / solved with relevant contributors. Define with PTM, actions in order to tackle remaining open items in the Projects according to VPM / SQM considering Kick-off or amendments outcomes
+*
+Show",PUR,Suppliers,,,,,,"11/04/2025 No escalation 
+04/04/2025 NO escalation
+28/03/2025 No esclation
+21/03/2025No escalation
+14/03/2025 - No escalation 
+07/03/2025 - No escalation
+Show","RG
+Rafael GARCIA TORRES
+JT
+Jaime TORRES",15-May-2026,25-Apr-2025,Select date,,,In progress,,,,,
+99,*,,,1,04-Mar-2025,WOoOM,,"PQA Process tracking
+
+ Manage and escalate if needed, potential critical items identified with SQA Team
+*",PUR,Suppliers,,,,,,"11/04/2025 No escalation 
+04/04/2025 NO escalation
+28/03/2025 No esclation
+21/03/2025No escalation
+14/03/2025 - No escalation 
+07/03/2025 - No escalation
+Show","RG
+Rafael GARCIA TORRES
+JT
+Jaime TORRES",15-May-2026,25-Apr-2025,Select date,,,In progress,,,,,
+98,*,,,1,04-Mar-2025,WOoOM,,"New issues communication & action plan
+
+Communicate on newly identified issues and define actions plans and actors to turn red topics to green
+*",PUR,Suppliers,,,,,,"11/04/2025 No escalation 
+04/04/2025 NO escalation
+28/03/2025 No esclation
+21/03/2025No escalation
+14/03/2025 - No escalation 
+07/03/2025 - No escalation
+Show","RG
+Rafael GARCIA TORRES
+JT
+Jaime TORRES",15-May-2026,25-Apr-2025,Select date,,,In progress,,,,,
+96,*,,,"3
+*",17-Mar-2025,Supplier,,"What: Film Inner cost too high for part (0,58€). Purchasing to investigate with supplier options to lower part cost. 
+Commercial agreement to include part has not been reached with customer.
+Why: Part needs to be attached to headlamp for life. 
+When: 
+Who: Rafael Garcia 
+Where:
+How:
+How many:
+*
+Show",PUR,Economics,,,,,,"02/09 Reminder to customer sent if no further agreement, film inner will be removed
+
+30/07 No agreement between commercial and purchasing. Pending to take decision on september about eliminating the adhesive
+
+17/06: Blue film passed PV1200. Film needs to be cut by supplier. Tooling budget not available. No commercial agreement. 
+
+03/06: PV1200 to be launched on CW23 with blue film.
+
+13/05: Material change not feasible due to lifetime adherance requirements. 
+
+08/05: WOoOm CW19. Potential raw material change proposal. 
+
+06/05: Pending 2D due to customer validation. 
+
+09/04: Sample pending. 
+2D sent for quotation with new dimensions. 
+Pending comercial agreement for part.
+
+01/04: Pending sample from supplier. 
+Unification rejected by customer. Modification proposal requested by process team still in progress, pending alignment with Seat team. 
+
+24/03/25: Supplier proposal with new film more cost effective. Target date of sample to be confirmed. 
+R&D team to confirm validation plan of film.
+R&D team reviewing with Seat proposal to unify film and simplify. Pending customer feedback on CW13. 
+
+17/03/25: Supplier feedback to be scheduled on CW12.
+Show","RG
+Rafael GARCIA TORRES
+CA
+Christopher-alexander ALDERTON
+FA
+Fernando AZNAR LAGUNA",16-May-2025,09-Sep-2025,Select date,,,"In progress
+*",,,,,
+"03/06: Pending customer agreement on tooling. Tooling cannot be launched. 
+
+13/05: Commercial agreement with customer pending. No budget to launch production tooling or validation testing.
+Show",,23-May-2025,09-Sep-2025,Select date,,,,,,,,,,,,,,,,,,,,,,,,
+91,*,,,1,04-Mar-2025,WOoOM,,"L2 planning’s consistent and respecting L1 milestones
+
+Detect at early stage risks of delays due to internal (Purchasing, other networks) / external (Customer, suppliers ) activities vs Team commitment taken in Part Tracker at PRKF. Verify good synchronization of L2 planning with all other functions L2 planning’s.
+*
+Show",PUR,Suppliers,,,,,,"11/04/2025 No escalation 
+04/04/2025 NO escalation
+28/03/2025 No esclation
+21/03/2025No escalation
+14/03/2025 - No escalation 
+07/03/2025 - No escalation
+Show","RG
+Rafael GARCIA TORRES
+JT
+Jaime TORRES",15-May-2026,24-Jul-2025,Select date,,,In progress,,,,,
+89,*,,,2,25-Feb-2025,Design Review,,"What: SOCO repair kit bracket needs to be launched by purchasing. 
+Why: Tooling needed to support customer repair demand. 
+When: TBD
+Who: Christopher Alderton.
+Where:
+How:
+How many:
+*
+Show",PUR,Suppliers,,,,,,"17/06: Pending final customer confirmation on design to launch SOCO. 
+
+03/06: Pending to launch based on crash test. 
+
+06/05: Pending SOCO. Customer to verify when parts are needed. 
+
+09/04: Pending SOCO. Customer to verify when parts are needed. 
+
+24/03/25: Pending SOCO. Customer to verify when parts are needed. 
+
+12/03/25: Pending SOCO. 
+
+26/02: Volume to be confirmed for SOCO. After, pending offer to launch SOCO. 
+
+25/02/25: PPT for SOCO shared on 24/02. Pending next steps and target date for SOCO.
+Show","RG
+Rafael GARCIA TORRES",23-May-2025,09-Sep-2025,Select date,,,In progress,,,,,
+88,*,,,"2
+*",24-Feb-2025,Supplier,,"What: Filtration of black plastic into clear area in lens
+Why: Displacement between phases
+When: CW08
+Who: Jose Ramon (Tooling engineer)
+Where:
+How:
+How many:
+*
+Show",,Product,,,,,,"02/09 to be reviewed during the injection of today
+
+17/06: Issue still present in parts. To be reviewed in mold on CW28. 
+
+03/06: Issue still present on FDPR parts. TBD plan from supplier to close topic. 
+
+06/05: New modification needed. 3D to be sent on CW18.
+
+01/04: Fender sealing recieved. Pending modification of 2K lens. 2K Lens T3 trial scheduled CW16.
+
+24/03: Fender sealing with modification to be recieved on CW13. 2K Lens T3 on CW16 to include modification. 
+
+10/03: Pending fender sealing implementation date.
+
+26/02: Pending offer and implementation timing from Fender sealing supplier to coodinate change in 2K lens mold.
+
+24/02: Modification to be done on lens and also on fender sealing. Shared 3D with supplier today, to confirm feasibility and quotation. Not possible to modify lens before fender seal.
+Show","CA
+Christopher-alexander ALDERTON
+RG
+Rafael GARCIA TORRES",16-May-2025,09-Sep-2025,Select date,,,"In progress
+*",,,,,
+87,*,,,"3
+*",20-Feb-2025,WOoOM,,"What: Horizontal aiming stick not defined correctly by design in high series headlamp. Rework needed for OFTO parts. New mold to be kicked off (estimate LT 17 weeks). 
+Why: Designer did not detect part has new dimension. 
+When: 19/02/25
+Who:
+Where:
+How:
+How many:
+*
+Show",RSD,Product,,,,,,"17/07 Ofto parts in August
+
+19/06: PO launched. 
+
+17/06: Pending to launch PO. 
+
+03/06: Pending offer. 
+
+13/05: Pending offer.
+
+06/05: Mold modification to be implemented to lower cost. Offer to be shared on CW18.
+
+09/04/25: 3 offers recieved. Pending SOCO. OI to be shared. 
+
+01/04/25: SOCO offers still pending. 
+
+24/03/25: Pending additional offers for stick to launch SOCO. 
+
+10/03/25: Pending offer to launch SOCO. 
+
+26/02/25: Pending offer to launch SOCO. 
+
+25/02/25: 3D shared on 21/02/25. VRF to be generated for SOCO. 
+
+20/02/25: Rework instruction to be shared with pre-series team. 
+Request to evaluate cost of proto mold.
+3D shared to launch SOCO.
+Show","CA
+Christopher-alexander ALDERTON
+RG
+Rafael GARCIA TORRES
+JM
+Jesus MOYA",30-May-2025,09-Sep-2025,Select date,,,"In progress
+*",,,,,
+New,*,,,,25-Sep-2025,,,"What: Why: When: Who: Where: How: How many:
+*",,,,,,,,,,Select date,Select date,Select date,,,,,,,,
+65,*,,,2,28-Nov-2024,,,"What: Adhesive on 2K Lens + Fender Seal cost increase due to new thickess. Process to evaluate using standard adhesive. 
+Why:
+When:
+Who:
+Where:
+How:
+How many:
+*
+Show",,,,,,,,"02/09 Pending to validate fender sealing dimensional and assembly on headlamp
+
+17/06: Pending to launch modification for new rib at Valeo Martos. 
+
+03/06: Pending 2K lens proto to solve customer issue of fender sealing falling off. 
+
+06/05: Pending confirmation from supplier to ease assembly. 
+
+09/04: Supplier to confirm on 09/04 production plan.
+
+01/04: Sample to be recieved on CW14 to validate.
+
+24/03: First parts off tool with PRE-CUT from supplier on CW13.
+
+10/03: Pending first samples to close SOCO. 
+
+26/02/25: Pending offer to launch PO for adhesive. 
+Film inner prototype to be recieved on CW10.1.
+
+20/02/25: Fender sealing offer recieved on 20/02/25. Target to close 21/02. SOCO to be closed in two weeks. 
+
+2K lens adhesive pending to recieve sample. 
+
+03/02/25: Pending supplier offer for specific two sided tape. Also to investigate standard double sided tape.
+
+14/01/25: SOCO in process. Purchasing and R&D to review sizes used in SOCO due to feasibility. 
+
+08/01/25: SOCO in process.
+
+10/12/24: SOCO in process. Pending to define which adhesive on 2D is approved.
+
+28/11/24: Sample parts to be tested on estereo headlamps.
+Show","CA
+Christopher-alexander ALDERTON
+RG
+Rafael GARCIA TORRES",23-May-2025,09-Sep-2025,Select date,,,In progress,,,,,
