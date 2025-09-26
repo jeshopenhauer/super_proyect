@@ -7,7 +7,7 @@ import time
 import csv
 import os
 import sys
-import json
+# import json eliminado
 from datetime import datetime
 
 # Función extract_html eliminada
@@ -231,13 +231,6 @@ def process_slir_code(code):
             "total_rows": len(all_rows)
         }
         
-        # Guardar los datos combinados en formato JSON
-        json_filename = os.path.join(output_dir, f"slir_{code}_{timestamp}_data.json")
-        with open(json_filename, "w", encoding="utf-8") as f:
-            json.dump(combined_data, f, ensure_ascii=False, indent=2)
-        
-        print(f"Datos combinados guardados en: {json_filename}")
-        
         # Guardar datos combinados en formato CSV
         csv_filename = os.path.join(output_dir, f"slir_{code}_{timestamp}_data.csv")
         save_to_csv(combined_data, csv_filename)
@@ -246,7 +239,6 @@ def process_slir_code(code):
         
         return {
             "code": code,
-            "json_file": json_filename,
             "csv_file": csv_filename,
             "extraction_time": timestamp,
             "pages_processed": current_page,
@@ -413,7 +405,6 @@ if __name__ == "__main__":
     
     if result and result.get("success", False):
         print(f"\nProcesamiento exitoso.")
-        print(f"- JSON guardado en: {result['json_file']}")
         print(f"- CSV guardado en: {result['csv_file']}")
         print(f"- Filas extraídas: {result['data']['total_rows']}")
         print(f"- Páginas procesadas: {result['pages_processed']}")
