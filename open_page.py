@@ -84,7 +84,7 @@ def manejar_login(driver):
         return False
     
 
-def open_page(slir_code, cerrar_previo=True, mantener_abierto=True):
+def open_page(slir_code, cerrar_previo=True, mantener_abierto=True, headless=True):
     """
     Abre Edge con el perfil del usuario y navega a la URL con el código SLIR proporcionado
 
@@ -92,6 +92,7 @@ def open_page(slir_code, cerrar_previo=True, mantener_abierto=True):
         slir_code (str): Código SLIR (ej: "SLIR1ST230476")
         cerrar_previo (bool): Si True, cierra cualquier instancia de Edge antes de abrir una nueva
         mantener_abierto (bool): Si True, mantiene el navegador abierto con detach=True
+        headless (bool): Si True, ejecuta Edge en modo sin interfaz gráfica (no visible)
 
     Returns:
         tuple: (webdriver.Edge, float) - Instancia del navegador Edge y tiempo de carga en segundos,
@@ -104,7 +105,16 @@ def open_page(slir_code, cerrar_previo=True, mantener_abierto=True):
         edge_options = Options()
         edge_options.add_argument(f"--user-data-dir={EDGE_USER_DATA_DIR}")
         
-
+        # Configurar modo headless si se solicita
+        if headless:
+            print("Ejecutando Edge en modo headless (sin interfaz gráfica)...")
+            edge_options.add_argument("--headless")
+            edge_options.add_argument("--disable-gpu")  # Necesario para algunos sistemas
+            # No usar detach en modo headless ya que no tiene sentido
+            mantener_abierto = False
+        else:
+            edge_options.add_argument("--start-maximized")  # Solo maximizar si no es headless
+        
         # Evitar detección de automatización
         edge_options.add_experimental_option("excludeSwitches", ["enable-automation"])
        
@@ -187,7 +197,8 @@ if __name__ == "__main__":
 
     # Código SLIR a procesar
     slir_code = "SLIR1ST230476"
-    driver, tiempo_carga = open_page(slir_code)
+    # Al ejecutar directamente este script, mostramos el navegador (headless=False)
+    driver, tiempo_carga = open_page(slir_code, headless=False)
 
     tiempo_fin_total = datetime.datetime.now()
     tiempo_total_proceso = (tiempo_fin_total - tiempo_inicio_total).total_seconds()

@@ -52,7 +52,7 @@ def extract_table_data(driver, wait_time=30):
         print(f"Error al extraer datos de la tabla: {e}")
         return None
 
-# Función extract_project_info eliminada
+
 
 def extract_table_rows(driver):
     """Extrae todas las filas de la tabla principal usando el selector 'table tbody tr'"""
@@ -118,8 +118,8 @@ def process_slir_code(code):
     """
     # La función open_page ahora recibe directamente el código SLIR como parámetro
     try:
-        # Abrir la página con el código proporcionado
-        driver, tiempo_carga = open_page(code)
+        # Abrir la página con el código proporcionado en modo headless
+        driver, tiempo_carga = open_page(code, headless=True)
         
         if not driver:
             print(f"No se pudo abrir la página para el código: {code}")
@@ -370,6 +370,7 @@ if __name__ == "__main__":
     test_code = "SLIR1ST230476"
     print(f"Procesando código SLIR de prueba: {test_code}")
     
+    # Al ejecutar directamente este script, usamos el modo headless (sin navegador visible)
     result = process_slir_code(test_code)
     
     if result and result.get("success", False):
