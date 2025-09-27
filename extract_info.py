@@ -1,3 +1,4 @@
+# Importar open_page que ahora acepta el código SLIR como parámetro
 from open_page import open_page
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -21,41 +22,24 @@ def extract_table_data(driver, wait_time=30):
         wait_time: Tiempo máximo de espera para la carga de la tabla en segundos
         
     Returns:
-        dict: Diccionario con los datos extraídos de la tabla y headers
+        dict: Diccionario con los datos extraídos de la tabla
     """
     try:
-        print("Esperamos a que la tabla cargue ...")
+        print("Esperando a que la tabla cargue...")
         
-        # Esperar a que desaparezca el spinner de carga si existe
-        try:
-            spinner_selector = ".spinner-container, .p-progress-spinner"
-            spinner = WebDriverWait(driver, 5).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, spinner_selector))
-            )
-            print("Spinner de carga detectado...")
-            WebDriverWait(driver, wait_time).until(
-                EC.invisibility_of_element_located((By.CSS_SELECTOR, spinner_selector))
-            )
-        except TimeoutException:
-            # Si no se encuentra el spinner o ya ha desaparecido, continuamos
-            pass
-        
-        # Esperar a que aparezca la tabla o filas de la tabla
-        print("Esperando a la tabla...")
+        # Esperar a que la tabla aparezca en la página
         WebDriverWait(driver, wait_time).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, "table tbody tr, tr td"))
+            EC.presence_of_element_located((By.CSS_SELECTOR, "table tbody tr"))
         )
         
-        
-        # Extraer solo datos de la tabla
+        # Extraer los datos de la tabla usando un método simplificado
         table_data = extract_table_rows(driver)
         
         result = {
-            "project_info": {},  # Proyecto info vacío ya que se eliminó esa función
             "table_data": table_data
         }
         
-        print(f"Datos de la tabla conseguidos: {len(table_data)} filas ")
+        print(f"Datos de la tabla conseguidos: {len(table_data)} filas")
         return result
         
     except TimeoutException as e:
@@ -71,27 +55,12 @@ def extract_table_data(driver, wait_time=30):
 # Función extract_project_info eliminada
 
 def extract_table_rows(driver):
-    """Extrae todas las filas de la tabla principal"""
+    """Extrae todas las filas de la tabla principal usando el selector 'table tbody tr'"""
     table_data = []
     
     try:
-        # Identificar las filas de la tabla (intenta con diferentes selectores)
-        selectors = [
-            "table tbody tr",
-            "tr[role='row']",
-            ".p-datatable-tbody tr",
-            "div[role='grid'] div[role='row']"
-        ]
-        
-        rows = None
-        for selector in selectors:
-            try:
-                rows = driver.find_elements(By.CSS_SELECTOR, selector)
-                if rows and len(rows) > 0:
-                    print(f"Filas encontradas con selector: {selector}")
-                    break
-            except:
-                continue
+        # Identificar las filas de la tabla usando un único selector confiable
+        rows = driver.find_elements(By.CSS_SELECTOR, "table tbody tr")
         
         if not rows or len(rows) == 0:
             print("No se encontraron filas en la tabla.")
@@ -147,9 +116,10 @@ def process_slir_code(code):
     Returns:
         dict: Datos extraídos o None si falla
     """
+    # La función open_page ahora recibe directamente el código SLIR como parámetro
     try:
         # Abrir la página con el código proporcionado
-        driver, tiempo_carga = open_page()
+        driver, tiempo_carga = open_page(code)
         
         if not driver:
             print(f"No se pudo abrir la página para el código: {code}")
@@ -224,7 +194,6 @@ def process_slir_code(code):
         
         # Actualizar el diccionario con todos los datos combinados
         combined_data = {
-            "project_info": {},  # Ya no tenemos info del proyecto
             "table_data": all_rows,
             "pages_processed": current_page,
             "total_pages": total_pages if total_pages else current_page,
@@ -384,7 +353,7 @@ def save_to_csv(table_data, csv_filename):
         if rows:
             headers = rows[0].keys()
             
-            with open(csv_filename, 'w', newline='', encoding='utf-8') as csvfile:
+            with open(csv_filename, 'w', newline='', encoding='utf-8-sig') as csvfile:
                 writer = csv.DictWriter(csvfile, fieldnames=headers)
                 writer.writeheader()
                 writer.writerows(rows)
